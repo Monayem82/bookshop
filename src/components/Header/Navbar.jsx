@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router';
+import { ToastContainer, toast } from 'react-toastify';
 
 const Navbar = () => {
 
@@ -9,6 +10,10 @@ const Navbar = () => {
         <li><NavLink to={`/ReadAndWishlist`}>Read & Wish List</NavLink></li>
 
     </>
+
+    const toasts=()=>{
+        toast("This feature available very soon")
+    }
 
     return (
         <div className="navbar bg-base-100 shadow-sm">
@@ -23,7 +28,7 @@ const Navbar = () => {
                         {Links}
                     </ul>
                 </div>
-                <a className="btn btn-ghost text-xl">BooK Show</a>
+                <NavLink className="btn btn-ghost text-xl" to='/'>BooK Show</NavLink>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
@@ -31,7 +36,8 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <a className="btn">Button</a>
+                <ToastContainer></ToastContainer>
+                <a onClick={toasts} className="btn">Log-in</a>
             </div>
         </div>
     );

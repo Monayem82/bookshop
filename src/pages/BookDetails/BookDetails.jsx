@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink, useLoaderData, useNavigate,  useParams } from 'react-router';
 import { addToLocalStorage } from '../../utilities/localStorage';
+import { ToastContainer } from 'react-toastify';
 
 const BookDetails = () => {
     const navigate=useNavigate()
@@ -8,12 +9,14 @@ const BookDetails = () => {
     const { bookId } = useParams()
     const eachbookData = parseInt(bookId)
 
+
     const eachBook = detailsBook.find(books => books.bookId === eachbookData)
     console.log(eachBook)
     const { bookName, image, review, totalPages, yearOfPublishing } = eachBook || {}
 
     const handleMarkAsRead=(id,storetype)=>{
         addToLocalStorage(id,storetype)
+        
     }
 
     const handleAddToWishlist=(id,storetype)=>{
@@ -41,7 +44,8 @@ const BookDetails = () => {
                     {review.length > 100 ? `${review.slice(0, 100)}...` : review}
                 </p>
                 <div className="card-actions">
-                    <button onClick={()=>handleMarkAsRead(eachbookData,'bookList')} className="btn btn-primary">Mark as Read</button>
+                    <ToastContainer />
+                    <button onClick={()=>{handleMarkAsRead(eachbookData,'bookList');}} className="btn btn-primary">Mark as Read</button>
                     <button onClick={()=>handleAddToWishlist(eachbookData,'wishlist')} className="btn btn-primary">Add To Wishlist</button>
                     <button onClick={()=>handleReadWishList()} className='btn btn-primary'>See Previous list</button>
                 </div>

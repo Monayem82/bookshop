@@ -1,3 +1,5 @@
+import { ToastContainer, toast } from 'react-toastify';
+
 const getLocalStorageData=(storetype)=>{
     let getStoreData
     if(storetype==='bookList'){
@@ -19,10 +21,11 @@ const addToLocalStorage=(id,storetype)=>{
     const storeData=getLocalStorageData(storetype)
     console.log(storeData)
     if(storeData.includes(id)){
-        alert("This book are aleady Read list")
+        toast("Already Exists")
     }else{
         storeData.push(id)
         const addLocal=JSON.stringify(storeData)
+        toast("Successfully Added")
         if(storetype==='bookList'){
             localStorage.setItem('bookList',addLocal)
         }else{
@@ -33,4 +36,27 @@ const addToLocalStorage=(id,storetype)=>{
     }
 }
 
-export {addToLocalStorage,getLocalStorageData}
+// Remove for localStorage
+
+const removeFromLocalStorage = (id, storetype) => {
+    const storeData = getLocalStorageData(storetype);
+    
+    if (storeData.includes(id)) {
+        const updatedData = storeData.filter(item => item !== id);
+        const updatedLocal = JSON.stringify(updatedData);
+
+        if (storetype === 'bookList') {
+            localStorage.setItem('bookList', updatedLocal);
+        } else {
+            localStorage.setItem('wishlist', updatedLocal);
+        }
+
+        alert("Successfully Removed");
+        console.log(updatedData);
+    } else {
+        alert("This book is not in the list");
+    }
+        
+};
+
+export {addToLocalStorage,getLocalStorageData,removeFromLocalStorage}
