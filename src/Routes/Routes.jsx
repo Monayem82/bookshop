@@ -5,6 +5,7 @@ import ErrorHandle from '../pages/ErrorHandle/ErrorHandle';
 import Home from '../pages/Home/Home';
 import About from '../pages/About/About';
 import BookDetails from '../pages/BookDetails/BookDetails';
+import ReadAndWishlist from '../pages/ReadAndWishlist/ReadAndWishlist';
 
 export const router = createBrowserRouter([
   {
@@ -38,6 +39,14 @@ export const router = createBrowserRouter([
           return res
         },
         Component: BookDetails
+      },
+      {
+        path:'ReadAndWishlist',
+        loader:async()=>{
+          const res=  await fetch('/booksData.json')
+          return res
+        },
+        Component:ReadAndWishlist,
       }
     ]
   },
